@@ -1,12 +1,21 @@
 import sys
 from PyQt4 import QtGui
-from win32api import GetSystemMetrics
-#tried to make the application begin in the middle of the screen but i failed
-#will try to make it happen for todolist application
-app = QtGui.QApplication(sys.argv)
 
-window = QtGui.QWidget()
-window.setGeometry(50,100,500,500)
-window.setWindowTitle("Python GUI")
+#Python OOP for GUI, makes sense for anything that may interact with it in a dynamic way
 
-window.show();
+class mainFrame(QtGui.QMainWindow):
+
+    def __init__(self):
+        super(mainFrame, self).__init__(); # Calling the superclasses constructor function. But why?
+        #ok just read that __init__ isn't a constructor -- it's an initializer
+        #.. __new__ is the constructor and it's not automatically invoked
+        self.setGeometry(50,50,500,500);
+        self.setWindowTitle("Jeffrey's Application")
+        self.setWindowIcon(QtGui.QIcon('jlogo.png'));
+        self.show();
+
+
+app = QtGui.QApplication(sys.argv);
+appFrame = mainFrame()
+sys.exit(app.exec_());
+
