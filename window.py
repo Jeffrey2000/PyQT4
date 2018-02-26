@@ -9,7 +9,7 @@ class mainFrame(QtGui.QMainWindow):
         self.setWindowTitle("Jeffrey's Application")
         self.setWindowIcon(QtGui.QIcon('jlogo.png'));
 
-
+        #sets the name of the dropdown label, only creating labels not actual menubar
         endApplication = QtGui.QAction("&Quit Application", self);
         endApplication.setShortcut("Ctrl+X");
         endApplication.setStatusTip("Leave the application");
@@ -20,15 +20,22 @@ class mainFrame(QtGui.QMainWindow):
         
         
         self.buttonQuit();
+
+        extractAction = QtGui.QAction(QtGui.QIcon('jlogo.png'),'Close Application',self);
+        extractAction.triggered.connect(self.close_application)
+
+        self.toolbar = self.addToolBar("Extraction")
+        self.toolbar.addAction(extractAction);
+        
         self.statusBar();
 
         
         #Creates menu bar
         mainMenu = self.menuBar(); #We make this object because we want to modify it
         fileMenu = mainMenu.addMenu("&File") #Adds sub menu to large menubar
-        fileMenu = mainMenu.addMenu("&Stupid random function")
+        randomFunction = mainMenu.addMenu("&Stupid random function")
         fileMenu.addAction(endApplication); #Application function created beforheand added to the menu
-        fileMenu.addAction(printToConsole);
+        randomFunction.addAction(printToConsole);
 
 
     def buttonQuit(self):
