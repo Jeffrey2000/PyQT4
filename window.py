@@ -52,8 +52,14 @@ class mainFrame(QtGui.QMainWindow):
         
 
     def close_application(self):
-        print("Application closed");
-        sys.exit();
+        userChoice = QtGui.QMessageBox.question(self, "Close Application",'Leave?',
+                                                QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+        if userChoice == QtGui.QMessageBox.Yes:
+            print("Leaving the application...")
+            sys.exit();
+        else:
+            pass
+            
 
     def button_resize(self):
         self.setWindowTitle("ZenithList")
