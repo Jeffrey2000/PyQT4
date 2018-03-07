@@ -19,15 +19,30 @@ class mainFrame(QtGui.QMainWindow):
         printToConsole.triggered.connect(self.printToConsole);
         
         
-        self.buttonQuit();
+        
 
         extractAction = QtGui.QAction(QtGui.QIcon('jlogo.png'),'Close Application',self);
         extractAction.triggered.connect(self.close_application)
 
         self.toolbar = self.addToolBar("Extraction")
         self.toolbar.addAction(extractAction);
+
+        checkBox = QtGui.QCheckBox("Enlarge window", self);
+        checkBox.move(200,200);
+        checkBox.stateChanged.connect(self.enlargeWindow);
         
-        self.statusBar();
+        self.progress = QtGui.QProgressBar(self)
+        self.progress.setGeometry(200,80,250,20)
+
+        self.downloadButton = QtGui.QPushButton("Count to 100,000",self)
+        self.downloadButton.move(300,300);
+        self.downloadButton.clicked.connect(self.download)
+
+   
+        
+
+        self.show();
+    
 
         
         #Creates menu bar
@@ -36,6 +51,18 @@ class mainFrame(QtGui.QMainWindow):
         randomFunction = mainMenu.addMenu("&Stupid random function")
         fileMenu.addAction(endApplication); #Application function created beforheand added to the menu
         randomFunction.addAction(printToConsole);
+
+    def download(self):
+        self.progress=0
+        while self.progress < 10:
+            self.progress+=1;
+            print(self.progress);
+
+    def enlargeWindow(self, state):
+        if state == QtCore.Qt.Checked:
+            self.setGeometry(50,50,1000,600)
+        else:
+            self.setGeometry(50,50,300,600)
 
 
     def buttonQuit(self):
